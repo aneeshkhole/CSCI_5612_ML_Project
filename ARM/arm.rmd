@@ -1,0 +1,65 @@
+---
+title: "Apriori with Nike Data"
+output: html_document
+date: "2025-02-15"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+#```{r}
+#install.packages(c("arules", "arulesViz", "data.table", "viridis"))
+#```
+
+```{r}
+library(viridis)
+library(arules)
+library(data.table)
+library(arulesViz)
+
+# Load Transaction Dataset
+file_path <- "nike_ARM_data.csv"  # Update this path if needed
+
+# Read dataset as a basket format transaction file
+transactions <- read.transactions(file_path, format = "basket", sep = ",", rm.duplicates = FALSE)
+
+# View summary of transactions
+summary(transactions)
+
+# Apply Apriori Algorithm
+# Generate frequent itemsets
+frequent_itemsets <- apriori(transactions, parameter = list(support = 0.05, target = "frequent itemsets"))
+
+# Generate association rules
+rules <- apriori(transactions, parameter = list(support = 0.05, confidence = 0.8, minlen = 2))
+
+# Save rules to CSV
+write(rules, file = "nike_ARM_rules.csv", sep = ",", quote = TRUE)
+
+# Display Top Rules
+# Sort and inspect the top rules by support
+inspect(head(sort(rules, by = "support", decreasing = TRUE), 15))
+
+# Sort and inspect the top rules by confidence
+inspect(head(sort(rules, by = "confidence", decreasing = TRUE), 15))
+
+# Sort and inspect the top rules by lift
+inspect(head(sort(rules, by = "lift", decreasing = TRUE), 15))
+
+# Item Frequency Plot
+itemFrequencyPlot(transactions, topN = 20, type = "absolute", main = "Top 20 Frequent Items")
+
+# Visualizing Association Rules
+# Select the top 20 rules by confidence
+top_rules_conf <- head(sort(rules, by = "confidence", decreasing = TRUE), 20)
+
+# Plot association rules as a network graph
+plot(top_rules_conf, method = "graph", engine = "interactive", main = "Association Rules Graph - Confidence")
+
+# Select the top 25 rules by lift
+top_rules_lift <- head(sort(rules, by = "lift", decreasing = TRUE), 25)
+
+# Plot association rules as a network graph
+plot(top_rules_lift, method = "graph", engine = "interactive", main = "Association Rules Graph - Lift")
+```

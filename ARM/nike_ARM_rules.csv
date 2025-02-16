@@ -1,0 +1,9 @@
+"rules","support","confidence","coverage","lift","count"
+"1","{Best Seller} => {Is Best Seller}",0.0992986341823551,1,0.0992986341823551,10.0706319702602,269
+"2","{Is Best Seller} => {Best Seller}",0.0992986341823551,1,0.0992986341823551,10.0706319702602,269
+"3","{Is Customize} => {Customize}",0.116279069767442,1,0.116279069767442,8.6,315
+"4","{Customize} => {Is Customize}",0.116279069767442,1,0.116279069767442,8.6,315
+"5","{Is Sustainable Materials} => {Sustainable Materials}",0.166851236618678,1,0.166851236618678,5.99336283185841,452
+"6","{Sustainable Materials} => {Is Sustainable Materials}",0.166851236618678,1,0.166851236618678,5.99336283185841,452
+"7","{Color Black,Is Sustainable Materials} => {Sustainable Materials}",0.0538944259874492,1,0.0538944259874492,5.99336283185841,146
+"8","{Color Black,Sustainable Materials} => {Is Sustainable Materials}",0.0538944259874492,1,0.0538944259874492,5.99336283185841,146
